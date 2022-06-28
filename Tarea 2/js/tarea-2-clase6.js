@@ -1,23 +1,9 @@
-// TAREA:
-// Crear una interfaz que permita agregar ó quitar (botones agregar y quitar) inputs+labels para completar el salario anual de cada integrante de la familia que trabaje.
-// Al hacer click en "calcular", mostrar en un elemento pre-existente el mayor salario anual, menor salario anual, salario anual promedio y salario mensual promedio.
-// Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como 0).
-
-// https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener
-// https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event
-// https://developer.mozilla.org/en-US/docs/Web/API/EventListener
-
-// HACER UN CONTADOR QUE SE SUME POR CADA CLICK, ASIGNARLO A UNA VARIABLE E IMPRIMIRLO JUNTO AL INPUT. EL BOTON LIMPIAR POR CADA CLICK VA A REDUCIR SU NUMERO A 1(contador - 1)
-// PENDIENTE: OCULTAR BOTONES SEGUN CONVENGA, REESCRIBIR EL PROMEDIO MENSUAL, ARREGLAR BUG DE CALCULOMENSUAL(resultado negativo), CUANDO LLENAMOS LLS INPUT Y AGREGAMOS OTRO, QUE NO BORRE LOS DATOS ANTERIORES AL AGREGAR UN NUEVO INPUT
-
 let cantidadFamiliares = 0;
 document.querySelector('#btn-crear').onclick = function (event) {
   cantidadFamiliares += 1;
 
-  mostrarBotonLimpiarCalcular()
-  crearFamiliar(cantidadFamiliares)
-  // borrarFamiliaresAnteriores();
-  // crearFamiliares(cantidadFamiliares);
+  mostrarBotonLimpiarCalcular();
+  crearFamiliar(cantidadFamiliares) ;
   
   event.preventDefault();
 };
@@ -39,14 +25,7 @@ function borrarFamiliaresAnteriores() {
   for (let i = 0; i < $familiares.length; i++) {
     $familiares[i].remove();
   }
-}
-
-// function crearFamiliares(cantidadFamiliares) {
-
-//   for (let i = 0; i < cantidadFamiliares; i++) {
-//     crearFamiliar(i);
-//   }
-// }
+} 
 
 function crearFamiliar(indice) {
   const $div = document.createElement('div');
@@ -112,9 +91,6 @@ document.querySelector('#btn-limpiar').onclick = function (event) {
   event.preventDefault();
 }
 
-// A las 2 tareas de la clase 6, ponerles las validaciones que consideren
-// necesarias(usando RegExp, forEach, Objetos, poner estilos, mostrar los errores en la interfaz de usuario y escribir pruebas)
-
 function validarSalario(salario) {
   if(salario === 0) {
     return 'Este campo solo acepta numeros, y que sean mayores a cero';
@@ -172,155 +148,8 @@ function exito() {
 
 function borrarMensajes() {
   let $labels = document.querySelectorAll('#errores li');
-      $labels.forEach(function(label){
-              label.remove()
-      });
+    $labels.forEach(function(label){
+      label.remove()
+    });
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // let contador = 0;
-  // document.querySelector('#btn-crear').onclick = function () {
-  //     contador += 1;
-  //       const nodoDosPagina = document.querySelector('body');
-  //       const tagLabel = document.createElement('label'); 
-  //       const textoLabel = document.createTextNode(`Sueldo anual del familiar ${contador}`);
-  //       tagLabel.setAttribute('id', `label-number-${contador}`);
-        
-  //       tagLabel.appendChild(textoLabel);
-  //       nodoDosPagina.appendChild(tagLabel);
-  
-  
-  //       const nodoPagina = document.querySelector('body');
-  //       const nuevoParrafo = document.createElement('input'); 
-  //       nuevoParrafo.setAttribute('type', 'number');
-  //       nuevoParrafo.setAttribute('id', `input-number-${contador}`);
-  //       nuevoParrafo.setAttribute('class', 'input-group');
-  //       nodoPagina.appendChild(nuevoParrafo); 
-    
-  //   }
-  
-  //   const $botonLimpiar = document.querySelector('#btn-limpiar');
-  
-  //   $botonLimpiar.onclick = function () {
-  //     contador -= 1;
-  //     if (contador < 0) {
-  //       contador = 0;
-  //     }     
-  //       document.querySelector(`#input-number-${contador + 1}`).remove()
-  //       document.querySelector(`#label-number-${contador + 1}`).remove()
-  //   }
-  
-  // const $botonCalcular = document.querySelector('#btn-calcular');
-  
-  // $botonCalcular .onclick = function () {
-    
-  //     let mostrarParrafo = document.querySelector('p').style.display = 'block'
-  //     let promedioSalarioAnual;
-  //     let promedioSalarioMensual;
-  //     let sumaSalarios = 0;
-  //     let mayorSalario = 0;
-  //     let menorSalario = 0;
-  //     let cantidadIntegrantes = 0;
-  
-  //     if(contador === 0) {
-  //       document.querySelector('p').style.display = 'none'
-  //     } 
-      
-  
-  //     for(let i = 1; i <= contador; i++) {
-  //       let numeroInput = Number(document.querySelector(`#input-number-${i}`).value);
-  //       sumaSalarios += numeroInput;
-  
-  //       if(i === 1) {
-  //         mayorSalario = numeroInput;
-  //         menorSalario = numeroInput;
-  //       } else if(numeroInput > mayorSalario) {
-  //         mayorSalario = numeroInput;
-  //       } else if(numeroInput === 0) {
-  //         menorSalario > numeroInput;
-  //       } else if(numeroInput < menorSalario) {
-  //         menorSalario = numeroInput;
-  //       }
-        
-  //       if (numeroInput > 0) {
-  //         cantidadIntegrantes += 1;
-  //       }
-  
-  //     }
-  //     promedioSalarioAnual = sumaSalarios / cantidadIntegrantes;
-  //     promedioSalarioMensual = promedioSalarioAnual / 12;
-  
-  //     document.querySelector('#salario-anual-promedio').innerText = `El salario Anual promedio es ${promedioSalarioAnual}`;
-  //     document.querySelector('#salario-mensual-promedio').innerText = `El salario Mensual promedio es ${promedioSalarioMensual}`;
-  //     document.querySelector('#mayor-salario-anual').innerText = `El mayor salario anual es ${mayorSalario}`;
-  //     document.querySelector('#menor-salario-anual').innerText = `El menor salario anual es ${menorSalario}`;
-  
-  //   }
-   
-  //   const $botonResetear = document.querySelector('#btn-resetear');
-  //   $botonResetear.onclick = function () {
-  
-  //     document.querySelector('p').style.display = 'none'
-  
-  //     for(let i = 1; i <= contador; i++) {
-  //       document.querySelector('input').remove();
-  //       document.querySelector('label').remove();
-  //     }
-  //     contador = 0; 
-  //   }
-  
